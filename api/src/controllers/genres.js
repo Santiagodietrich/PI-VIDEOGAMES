@@ -3,7 +3,7 @@ const axios=require("axios");
 
 
 const Genres=async (req, res)=>{
-
+    
     let genres=await Genre.findAll();
 
     if(genres.length ===0){
