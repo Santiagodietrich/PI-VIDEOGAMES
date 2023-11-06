@@ -5,24 +5,44 @@ import{
     ORDER_BY_NAME,
     ORDER_BY_RATING,
     FILTER_BY_ORIGIN,
+    GET_VIDEOGAME,
+    // GET_NAME_VIDEOGAMES
 } from "./actions";
 
 const initialState={
     allGenres:[],
     allVideogames:[],
+    gameId:[],
 }
 
 const reducer=(state=initialState,action)=>{
     switch(action.type){
 
         case GET_ALL_VIDEOGAMES:
+            
             return{
                 ...state,
                 allVideogames:action.payload,
                 allGenres:action.payload
             };
 
+        
+
+        case GET_VIDEOGAME:
+
+            return{
+                ...state,
+                gameId:action.payload
+            }
+
+        // case GET_NAME_VIDEOGAMES:
+        //     return{
+        //         ...state,
+        //         allVideogames:action.payload
+        //     }
+
         case FILTER_BY_GENRE:
+            
             const genreToFilter=action.payload;
             if(genreToFilter === ""){
                 return{...state,allGenres: state.allVideogames};// Mostrar todos los videojuegos
@@ -53,6 +73,7 @@ const reducer=(state=initialState,action)=>{
             }
 
         case ORDER_BY_NAME:
+            console.log("gameId",state.gameId)
             let sortedGames;
             if(action.payload === "Descendente"){
                 sortedGames=[...state.allGenres].sort((a, b)=>b.name.localCompare(a.name));

@@ -25,23 +25,17 @@ export function getAllVideogames(){
 
 export function getVideogame(id){
     return async function(dispatch){
-        const videogame=await axios.get(`http://localhost:3001/videogames/${id}`);
+        const json=await axios.get(`http://localhost:3001/videogames/${id}`);
         return dispatch({
             type:"GET_VIDEOGAME",
-            payload:videogame.data
+            payload:json.data
         })
     }
 }
 
 // export function getNameVideogames(name){
 //     return async function (dispatch){
-//         try{
-//             let allVg=await axios.get( `http://localhost:3001/videogames?name=${name}`);
-//         }catch(error){
-//             if(error.response.status === 404){
-//                 allVg={data:"Not found"}
-//             }
-//         }
+//         let allVg=await axios.get( `http://localhost:3001/videogames?name=${name}`);
 //         return dispatch({
 //             type:GET_NAME_VIDEOGAMES,
 //             payload:allVg.data

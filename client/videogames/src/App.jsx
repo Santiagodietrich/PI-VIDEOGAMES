@@ -15,34 +15,32 @@ function App() {
 
   const navigate=useNavigate();
 
-//   async function onSearch(name){
-//     try{
-//       const lowerCaseName=name.toLowerCase();
-//       console.log("nombre",lowerCaseName)
-//       const response=await axios.get(`http://localhost:3001/videogames?name=${lowerCaseName}`);
-// // https://api.rawg.io/api/games?search=${lowerCaseName}&key=574a2e1d874a498db48bf6179e7cbd2a`
+  // async function onSearch(name){
+  //   try{
+  //     const lowerCaseName=name.toLowerCase();
+  //     console.log("nombre",lowerCaseName)
+  //     const response=await axios.get(`http://localhost:3001/videogames?name=${lowerCaseName}`);
+  //     console.log("response",response.data)
+  //     if(response.data.length > 0){
+  //       const gameName=response.data[0].name;
+  //       const gameExist=videojuego.some((game)=>game.name.toLowerCase() === gameName);
+  //       console.log("gameExist",gameExist)
+  //       if(response.data.id){
+  //         navigate(`/detail/${response.data.id}`);
+  //       }
 
-//       console.log("response",response)
-//       if(response.data && response.data.length > 0){
-//         const gameName=response.data[0].name;
-//         const gameExist=videojuego.some((game)=>game.name.toLowerCase() === gameName);
-//         console.log("gameExist",gameExist)
-//         if(response.data.id){
-//           navigate(`/detail/${response.data.id}`);
-//         }
+  //       if(!gameExist){
+  //         setVideojuego((prevGames)=> [...prevGames,{name:gameName}])
+  //       }
+  //     }else{
+  //       window.alert("El videojuego no existe");
+  //     }
 
-//         if(!gameExist){
-//           setVideojuego((prevGames)=> [...prevGames,{name:gameName}])
-//         }
-//       }else{
-//         window.alert("El videojuego no existe");
-//       }
-
-//     }catch(error){
-//       window.alert("Ocurrió un error al buscar el videojuego")
-//     }
+  //   }catch(error){
+  //     window.alert("Ocurrió un error al buscar el videojuego")
+  //   }
     
-//   }
+  // }
 
 // async function onSearch(name) {
 //   try {
@@ -68,26 +66,52 @@ function App() {
 //   }
 // }
 
-async function onSearch(name){
-  try{
-    const lowerCaseName=name.toLowerCase();
-    const response = await axios.get(`http://localhost:3001/videogames?name=${name}`);
-    if(response.data.length > 0){
-      // const videogame=response.data.name.toLowerCase()
-      // console.log("videogame",videogame)
-      console.log("response",response)
-      const gameExist=response.data.some((g)=> g.name.toLowerCase() === lowerCaseName)
+// async function onSearch(name){
+//   try{
+//     const lowerCaseName=name.toLowerCase();
+//     const response = await axios.get(`http://localhost:3001/videogames?name=${name}`);
+//     if(response.data && response.data.name){
+//        const videogame=response.data.name.toLowerCase()
+//        console.log("namee",videogame)
+//       console.log("response",response)
+//       const gameExist=response.data.some((g)=> g.name === lowerCaseName)
+//       // if (gameExist) {
+//       //   const gameName = gameExist.name;
+//       //   console.log("Exist", gameName);
+//       // }
+//       console.log("exist",gameExist)
+//     }
+
+//   }catch(error){
+//     window.alert("Ocurrió un error al buscar el videojuego");
+//   }
+// }
+
+
+
+
+
+async function onSearch(name) {
+  try {
+    const lowerCaseName = name.toLowerCase();
+    const response = await axios.get(`http://localhost:3001/videogames?name=${lowerCaseName}`);
+
+    if (response.data && response.data.length > 0) {
+      const gameExist = response.data.some((game) => game.name.toLowerCase() === lowerCaseName);
+      console.log("exist", gameExist);
+
       if (gameExist) {
-        const gameName = gameExist.name;
+        const gameName = response.data.find((game) => game.name.toLowerCase() === lowerCaseName).name;
         console.log("Exist", gameName);
       }
-      console.log("exist",gameExist)
+    } else {
+      window.alert("El videojuego no existe");
     }
-
-  }catch(error){
+  } catch (error) {
     window.alert("Ocurrió un error al buscar el videojuego");
   }
 }
+
 
 
   const location=useLocation();
