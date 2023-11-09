@@ -6,6 +6,7 @@ import{
     ORDER_BY_RATING,
     FILTER_BY_ORIGIN,
     GET_VIDEOGAME,
+    GET_GENRES,
     // GET_NAME_VIDEOGAMES
 } from "./actions";
 
@@ -13,6 +14,7 @@ const initialState={
     allGenres:[],
     allVideogames:[],
     gameId:[],
+    generos:[],
 }
 
 const reducer=(state=initialState,action)=>{
@@ -40,6 +42,13 @@ const reducer=(state=initialState,action)=>{
         //         ...state,
         //         allVideogames:action.payload
         //     }
+
+
+        case GET_GENRES:
+            return{
+                ...state,
+                generos:action.payload
+            }
 
         case FILTER_BY_GENRE:
             
@@ -72,16 +81,64 @@ const reducer=(state=initialState,action)=>{
                  return{...state,allGenres:filteredByDb};// Filtrar por origen DB
             }
 
-        case ORDER_BY_NAME:
-            console.log("gameId",state.gameId)
-            let sortedGames;
-            if(action.payload === "Descendente"){
-                sortedGames=[...state.allGenres].sort((a, b)=>b.name.localCompare(a.name));
-            }else{
-                sortedGames=[...state.allGenres].sort((a, b)=>a.name.localCompare(b.name));
-            }
+        // case ORDER_BY_NAME:
+        //         console.log("gameId", state.gameId);
+        //         let sortedGames;
+    
+        //         if (action.payload === "Descendente") {
+        //             sortedGames = [...state.allGenres].sort((a, b) => {
+        //                 if (a.name < b.name) {
+        //                     return -1;
+        //                 }
+        //                 if (a.name > b.name) {
+        //                     return 1;
+        //                 }
+        //                 return 0;
+        //             });
+        //         } else {
+        //             sortedGames = [...state.allGenres].sort((a, b) => {
+        //                 if (a.name < b.name) {
+        //                     return -1;
+        //                 }
+        //                 if (a.name > b.name) {
+        //                     return 1;
+        //                 }
+        //                 return 0;
+        //             });
+        //         }
+    
+        //         return { ...state, allGenres: sortedGames };
 
-            return{...state,allGenres:sortedGames};
+
+        case ORDER_BY_NAME:
+    console.log("gameId", state.gameId);
+    let sortedGames;
+    const isDescending = state.isDescending; // Variable de estado para rastrear la dirección de la ordenación
+
+    if (action.payload === "Descendente") {
+        sortedGames = [...state.allGenres].sort((a, b) => {
+            if (isDescending) {
+                // Orden descendente
+                return a.name > b.name ? -1 : 1;
+            } else {
+                // Orden ascendente
+                return a.name < b.name ? -1 : 1;
+            }
+        });
+    } else {
+        sortedGames = [...state.allGenres].sort((a, b) => {
+            if (isDescending) {
+                // Orden descendente
+                return a.name > b.name ? -1 : 1;
+            } else {
+                // Orden ascendente
+                return a.name < b.name ? -1 : 1;
+            }
+        });
+    }
+
+    return { ...state, allGenres: sortedGames, isDescending: !isDescending }; // Alternar la dirección de la ordenación
+
 
         case ORDER_BY_RATING:
             let gamesOrd;

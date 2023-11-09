@@ -1,0 +1,41 @@
+.card {
+  display: grid;
+    width: 90px;
+    height: 314px;
+    border-radius: 20px;
+    background: #c5fcb2;
+    position: relative;
+    border: 2px solid #c3c6ce;
+    transition: 0.5s ease-out;
+    overflow: visible;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative; /* Agregamos relative para el posicionamiento absoluto interno */
+    text-align: center; /* Centra el contenido horizontalmente */
+  }
+  
+  .cardDetails {
+    color: black;
+    position: absolute; /* Superpone el contenido */
+    top: 50%; /* Lo posiciona verticalmente en el centro */
+    left: 50%; /* Lo posiciona horizontalmente en el centro */
+    transform: translate(-50%, -50%); /* Lo ajusta perfectamente en el centro */
+    
+  }
+  
+  .card:hover {
+    border-color: #008bf8;
+    box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
+  }
+  
+  .bandera {
+    width: 50%;
+    height: 30%;
+    position: absolute; /* Superpone la bandera */
+    top: 280px; /* Alinea la parte superior de la bandera con la parte superior de la tarjeta */
+    left: 50%; /* Centra horizontalmente */
+    transform: translateX(-50%); /* Ajusta horizontalmente en el centro */
+    z-index: 1; /* Asegura que la bandera esté sobre la tarjeta */
+  }
+  

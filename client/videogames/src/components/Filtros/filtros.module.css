@@ -1,0 +1,12 @@
+.filtro{
+    position:absolute;
+    z-index:1;
+    top:-10px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+    right:150px; 
+    
+    
+}

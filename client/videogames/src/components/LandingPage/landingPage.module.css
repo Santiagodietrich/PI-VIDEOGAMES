@@ -1,14 +1,39 @@
 .landing{
-
+    
 }
-.titulo{
-    top: 1180px;
+.titulo {
+    position: relative; /* Añade posicionamiento relativo */
+    z-index: 1; /* Asegura que el título esté en un z-index superior */
+    margin-top: -25px;
+    width: auto;
+    margin-left: -80px;
+    color: black;
 }
 
-.controles{
- margin-top: -50px;
- margin-left: 0px;
- height: 670px;
- width: 800px;
- 
+.controles {
+    position: relative; /* Añade posicionamiento relativo */
+    z-index: 2; /* Asegura que los controles estén en un z-index superior */
+    height: 510px;
+    width: 550px;
+    margin-top: -50px;
+}
+
+.boton {
+    position: relative; /* Añade posicionamiento relativo */
+    z-index: 2; /* Asegura que el botón esté en un z-index superior */
+    margin-left: -93px;
+    top: -40px;
+    width: 82px;
+    height: 30px;
+    background-color: transparent;
+    
+}
+
+.start {
+    width: 190px;
+    height: 190px;
+    position: relative; /* Añade posicionamiento relativo */
+    z-index: 1; /* Asegura que la imagen esté en un z-index inferior */
+    margin-top: -90px;
+    margin-left: -60px;
 }

@@ -24,12 +24,16 @@ export function getAllVideogames(){
 
 
 export function getVideogame(id){
+    try{
     return async function(dispatch){
-        const json=await axios.get(`http://localhost:3001/videogames/${id}`);
+        const json=await axios.get(`http://localhost:3001/videogames-${id}`);
         return dispatch({
             type:"GET_VIDEOGAME",
             payload:json.data
         })
+    }
+    }catch(error){
+        console.error("error al cargar los datos")
     }
 }
 
@@ -53,15 +57,39 @@ export function createVideoGame(data){
     }
 }
 
-export function getGenres(){
-    return async function (dispatch){
-        let allGenres=axios.get(`http://localhost:3001/genres`);
-        return dispatch({
-            type:GET_GENRES,
-            payload:allGenres.data
+// export function getGenres(){
+//     try{
+//         return async function (dispatch){
+//             let allGenres=axios.get(`http://localhost:3001/genres`);
+//             console.log("allGenres",allGenres)
+//             return dispatch({
+//                 type:GET_GENRES,
+//                 payload:allGenres.data
+//             });
+//         }
+//     }catch(error){
+//         console.error(error)
+//     }
+// }
+
+
+export function getGenres() {
+    return async function (dispatch) {
+      try {
+        const response = await axios.get(`http://localhost:3001/genres`);
+        const allGenres = response.data;
+        console.log("allGenres", allGenres);
+  
+        dispatch({
+          type: GET_GENRES,
+          payload: allGenres,
         });
-    }
-}
+      } catch (error) {
+        console.error(error);
+      }
+    };
+  }
+  
 
 export function filterByGenre(payload){
     return{

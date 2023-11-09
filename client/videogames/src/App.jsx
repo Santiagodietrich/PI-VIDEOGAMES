@@ -7,118 +7,49 @@ import Detail from '../src/components/Detail/detailPage';
 import {Routes,Route,useNavigate,useLocation} from "react-router-dom";
 import NavBar from "../src/components/NavBar/navBar";
 import Cards from "../src/components/Cards/cards";
+import SearchBar from './components/SearchBar/searchBar';
 
 
 function App() {
 
-  const {videojuego,setVideojuego}=useState();
-
+  const [videojuego,setVideojuego]=useState([]);
+  console.log("videoG",videojuego)
   const navigate=useNavigate();
 
-  // async function onSearch(name){
-  //   try{
-  //     const lowerCaseName=name.toLowerCase();
-  //     console.log("nombre",lowerCaseName)
-  //     const response=await axios.get(`http://localhost:3001/videogames?name=${lowerCaseName}`);
-  //     console.log("response",response.data)
-  //     if(response.data.length > 0){
-  //       const gameName=response.data[0].name;
-  //       const gameExist=videojuego.some((game)=>game.name.toLowerCase() === gameName);
-  //       console.log("gameExist",gameExist)
-  //       if(response.data.id){
-  //         navigate(`/detail/${response.data.id}`);
-  //       }
+  async function onSearch(name,videojuego,setVideojuego){
+    try{
+      const lowerCaseName=name.toLowerCase();
+      console.log("nombre",lowerCaseName)
+      const response=await axios.get(`http://localhost:3001/name?name=${lowerCaseName}`);
+      console.log("response",response.data)
+      if(response.data.length > 0){
+        const gameName=response.data[0].name;
+        
+        const gameExist=videojuego.some((game)=>game.name.toLowerCase() === gameName);
+        console.log("gameExist",gameExist)
+        if(response.data.id){
+          navigate(`/detail/${response.data.id}`);
+        }
 
-  //       if(!gameExist){
-  //         setVideojuego((prevGames)=> [...prevGames,{name:gameName}])
-  //       }
-  //     }else{
-  //       window.alert("El videojuego no existe");
-  //     }
-
-  //   }catch(error){
-  //     window.alert("Ocurrió un error al buscar el videojuego")
-  //   }
-    
-  // }
-
-// async function onSearch(name) {
-//   try {
-//     const lowerCaseName = name.toLowerCase(); // Convertir a minúsculas
-//     console.log("nombre", lowerCaseName);
-//     const response = await axios.get(`http://localhost:3001/videogames?name=${lowerCaseName}`);
-
-//     console.log("response", response);
-
-//     if (response.data && response.data.length > 0) {
-//       // La respuesta es una matriz, así que vamos a comprobar si el juego existe en la lista
-//       const gameExists = response.data.some((game) => game.name.toLowerCase() === lowerCaseName);
-//       if (gameExists) {
-//         // Realiza las acciones que necesites
-//       } else {
-//         window.alert("El videojuego no existe");
-//       }
-//     } else {
-//       window.alert("El videojuego no existe");
-//     }
-//   } catch (error) {
-//     window.alert("Ocurrió un error al buscar el videojuego");
-//   }
-// }
-
-// async function onSearch(name){
-//   try{
-//     const lowerCaseName=name.toLowerCase();
-//     const response = await axios.get(`http://localhost:3001/videogames?name=${name}`);
-//     if(response.data && response.data.name){
-//        const videogame=response.data.name.toLowerCase()
-//        console.log("namee",videogame)
-//       console.log("response",response)
-//       const gameExist=response.data.some((g)=> g.name === lowerCaseName)
-//       // if (gameExist) {
-//       //   const gameName = gameExist.name;
-//       //   console.log("Exist", gameName);
-//       // }
-//       console.log("exist",gameExist)
-//     }
-
-//   }catch(error){
-//     window.alert("Ocurrió un error al buscar el videojuego");
-//   }
-// }
-
-
-
-
-
-async function onSearch(name) {
-  try {
-    const lowerCaseName = name.toLowerCase();
-    const response = await axios.get(`http://localhost:3001/videogames?name=${lowerCaseName}`);
-
-    if (response.data && response.data.length > 0) {
-      const gameExist = response.data.some((game) => game.name.toLowerCase() === lowerCaseName);
-      console.log("exist", gameExist);
-
-      if (gameExist) {
-        const gameName = response.data.find((game) => game.name.toLowerCase() === lowerCaseName).name;
-        console.log("Exist", gameName);
+        if(!gameExist){
+          setVideojuego((prevGames)=> [...prevGames,{name:gameName}])
+        }
+      }else{
+        window.alert("El videojuego no existe");
       }
-    } else {
-      window.alert("El videojuego no existe");
+
+    }catch(error){
+      window.alert("Ocurrió un error al buscar el videojuego")
     }
-  } catch (error) {
-    window.alert("Ocurrió un error al buscar el videojuego");
+    
   }
-}
-
-
 
   const location=useLocation();
 
 
   return (
     <div className="App">
+       <SearchBar onSearch={onSearch} videojuego={videojuego} setVideojuego={setVideojuego} />
       {location.pathname !== '/' && <NavBar onSearch={onSearch}/>}
       <Routes>
         <Route path='/' element={<Landing/>}></Route>

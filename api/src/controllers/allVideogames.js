@@ -1,31 +1,36 @@
 const axios = require("axios");
-const gameSize=15
+
 
 const AllVideogames = async (req, res) => {
     try {
-        const {paginado=1}=req.query
 
-        const startIndex=(paginado-1)*gameSize;//indica desde que videojuego debe arrancar a renderizar
+        // const experimento=100/gameSize;
+        
+      
+        
+        // const startIndex = (paginado - 1) * gameSize;
+        // console.log("paginado",paginado)
 
-        const response = await axios.get(`https://api.rawg.io/api/games?offset=${startIndex}&limit=${gameSize}&page_size=100&key=574a2e1d874a498db48bf6179e7cbd2a`);
+        const responseUno = await axios.get(`https://api.rawg.io/api/games?key=574a2e1d874a498db48bf6179e7cbd2a`);
+        const receivedData = responseUno.data;
 
+        if (receivedData && receivedData.results) {
+            const mapeo = receivedData.results.map((m) => {
+                const platforms = m.platforms.map((e) => e.platform.name);
+                const genres = m.genres.map((e) => e.name);
 
-        const recibido = response.data; // El objeto completo de la respuesta
-
-
-        // Asegúrate de que el objeto contiene los datos que deseas mapear
-        if (recibido && recibido.results) {
-            const mapeo = recibido.results.map((m) => {
                 return {
                     id: m.id,
                     name: m.name,
                     released: m.released,
                     background_image: m.background_image,
                     rating: m.rating,
-                    platforms: m.platforms,
-                    description: m.description
+                    platforms: platforms,
+                    description: m.description,
+                    genres: genres,
                 };
             });
+
             res.status(200).json(mapeo);
         } else {
             res.status(500).json({ error: "Datos de la API no son válidos" });

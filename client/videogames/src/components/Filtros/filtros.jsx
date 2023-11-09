@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { filterByGenre,filterOrigin,orderByName,orderByRating } from "../../redux/actions";
+import styles from "./filtros.module.css"
 
 
 export default function Filtered({generos,setGeneros}){
@@ -14,6 +15,7 @@ export default function Filtered({generos,setGeneros}){
     useEffect(()=>{
         if(generos && generos.length > 0){
         setGeneros(generos)
+        console.log("genero",generos)
         }
     },[generos]);
 
@@ -49,7 +51,7 @@ export default function Filtered({generos,setGeneros}){
 
 
     return(
-        <div>
+        <div className={styles.filtro}>
             <div>
                 <label>Filtrar por Genero:</label>
                 <select value={selectedGenre} onChange={(e)=> handleGenreChange(e.target.value)}>
