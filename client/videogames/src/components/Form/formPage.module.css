@@ -108,8 +108,8 @@
   .mario {
     width: 390px;
     height: 390px;
-    position: relative; /* Añade posicionamiento relativo */
-    z-index: 1; /* Asegura que la imagen esté en un z-index inferior */
+    position: relative; 
+    z-index: 1; 
     top: -490px;
     left: 670px;
 }
@@ -117,8 +117,8 @@
 .wario {
     width: 390px;
     height: 390px;
-    position: relative; /* Añade posicionamiento relativo */
-    z-index: 1; /* Asegura que la imagen esté en un z-index inferior */
+    position: relative; 
+    z-index: 1; 
     top: -445px;
     left: -690px;
 }

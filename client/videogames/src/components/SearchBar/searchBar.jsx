@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "./searchBar.module.css"
 
 
-export default function SearchBar ({onSearch, videojuego, setVideojuego }){
+export default function SearchBar ({onSearch}){
 
     const [name,setName]=useState("");
     const handleChange=(event)=>{
@@ -14,7 +14,7 @@ export default function SearchBar ({onSearch, videojuego, setVideojuego }){
 
         <div className={styles.container}>
             <input className={styles.input} placeholder="Enter your videogame..." onChange={handleChange} value={name} type="search"></input>
-            <button className={styles.boton} onClick={()=>onSearch(name,videojuego,setVideojuego)}>Search</button>
+            <button className={styles.boton} onClick={()=>onSearch(name)}>Search</button>
         </div>
     )
 

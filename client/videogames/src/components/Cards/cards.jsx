@@ -1,145 +1,3 @@
-// import React,{useState,useEffect} from "react";
-// import { useDispatch,useSelector } from "react-redux";
-// import axios from "axios";
-// import Card from "../Card/card";
-// import { getAllVideogames, getGenres } from "../../redux/actions";
-// import Filtered from "../Filtros/filtros";
-// import styles from "../Cards/cards.module.css"
-
-
-// export default function Cards(){
-
-//     const[date,setDate]=useState([]);
-//     const[generos,setGeneros]=useState([]);
-//     const videoJuegos=useSelector((state)=>state.allGenres)
-
-//     const[currentPage,setCurrentPage]=useState(1);
-//     const dispatch=useDispatch();
-
-//     useEffect(()=>{
-//         dispatch(getAllVideogames()),
-//         dispatch(getGenres())
-//     },[dispatch])
-
-//     const handleNextPage=()=>{
-//         setCurrentPage(currentPage + 1);
-//     };
-
-//     const handlePrevPage=()=>{
-//         if(currentPage > 1){
-//             setCurrentPage(currentPage - 1);
-//         }
-//     };
-
-
-//     const handleOrderAsc= async()=>{
-//         try{
-//             await dispatch(orderAsc());
-//         }catch(error){
-//         console.error(error)
-//         }
-//     }
-
-//     const handleOrderDesc=async()=>{
-//         try{
-//             await dispatch(orderDesc())
-//         }catch(error){
-//             console.error(error)
-//         }
-//     }
-
-//     return(
-//         <div>
-//             <div className={styles.carta}>
-//                <Filtered generos={generos} setGeneros={setGeneros}></Filtered> 
-//                {videoJuegos.map((element)=>(
-//                 <Card
-//                     key={element.id}
-//                     id={element.id}
-//                     name={element.name}
-//                     genres={element.genres}
-//                     background_image={element.background_image}
-//                 />
-//                ))}
-//             </div>
-//             <div>
-//                 <button onClick={handlePrevPage} disabled={currentPage === 1}>Previous</button>
-//                 <button onClick={handleNextPage}>Next</button>
-//             </div>
-//         </div>
-//     );
-
-
-// }
-
-
-
-// import React, { useState, useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import axios from "axios";
-// import Card from "../Card/card";
-// import Filtered from "../Filtros/filtros";
-// import styles from "../Cards/cards.module.css";
-// import { getAllVideogames,getGenres } from "../../redux/actions";
-
-// export default function Cards() {
-//   const [date, setDate] = useState([]);
-//   const [generos, setGeneros] = useState([]);
-//   const videoJuegos = useSelector((state) => state.allGenres);
-//   const dispatch = useDispatch();
-
-//   const [currentPage, setCurrentPage] = useState(1);
-//   const gamesPerPage = 15;
-
-//   useEffect(() => {
-//     dispatch(getAllVideogames());
-//     dispatch(getGenres());
-//   }, [dispatch]);
-
-//   const handleNextPage = () => {
-//     setCurrentPage(currentPage + 1);
-//   };
-
-//   const handlePrevPage = () => {
-//     if (currentPage > 1) {
-//       setCurrentPage(currentPage - 1);
-//     }
-//   };
-
-//   // Filtra los videojuegos para mostrar solo los de la página actual
-//   const gamesToDisplay = videoJuegos.slice(
-//     (currentPage - 1) * gamesPerPage,
-//     currentPage * gamesPerPage
-//   );
-
-//   return (
-//     <div>
-//       <div className={styles.carta}>
-//         <Filtered generos={generos} setGeneros={setGeneros}></Filtered>
-//         {gamesToDisplay.map((element) => (
-//           <Card
-//             key={element.id}
-//             id={element.id}
-//             name={element.name}
-//             genres={element.genres}
-//             background_image={element.background_image}
-//           />
-//         ))}
-//       </div>
-//       <div>
-//         <button onClick={handlePrevPage} disabled={currentPage === 1}>
-//           Previous
-//         </button>
-//         <button onClick={handleNextPage} disabled={currentPage * gamesPerPage >= 100}>
-//           Next
-//         </button>
-//       </div>
-//     </div>
-//   );
-// }
-
-
-
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
@@ -147,6 +5,8 @@ import Card from "../Card/card";
 import Filtered from "../Filtros/filtros";
 import styles from "../Cards/cards.module.css";
 import { getAllVideogames, getGenres } from "../../redux/actions";
+import SearchBar from "../SearchBar/searchBar";
+import Paginacion from "../Paginado/paginacion";
 
 
 export default function Cards() {
@@ -227,3 +87,57 @@ export default function Cards() {
   );
 }
 
+// export default function Cards (){
+  
+//   const videoJuegos = useSelector((state) => state.allGenres);
+//   const dispatch = useDispatch();
+
+//   useEffect(() => {
+//     dispatch(getAllVideogames());
+//     dispatch(getGenres());
+//   }, [dispatch]);
+
+//   const [currentPage,setCurrentPage]=useState(1)
+//   const [cardPerPage]=useState(15)
+
+// //Indice de la paginacion
+//   const indexOfLastCard=currentPage * cardPerPage;
+//   const indexOfFirstCard=indexOfLastCard - cardPerPage
+
+//   let currentCards;//cartas que se deben mostrar en las pantalla
+
+//   if(typeof videoJuegos === "string"){//en caso de que al buscar un juego en particular no encuentra ninguno
+//     currentCards=videoJuegos
+//   }else{
+//     currentCards=videoJuegos.slice(indexOfFirstCard, indexOfLastCard)//uso los indices para fraccionar que juegos muestro
+//   }
+
+//   const paginate=(pageNumber)=>{
+//     setCurrentPage(pageNumber)
+//   }
+
+//   return(
+//     <div>
+//       <SearchBar/>
+//       <Paginacion cardPerPage={cardPerPage} totalCards={videoJuegos.lenght} paginate={paginate} currentPage={currentPage}/>
+
+//       <div>
+//         {
+//           currentCards.map((element)=>(
+//             <Card 
+//              key={element.id}
+//               id={element.id}
+//               name={element.name}
+//               genres={element.genres}
+//               background_image={element.background_image}
+//             />
+//           ))
+          
+//         }
+//       </div>
+
+
+//     </div>
+//   )
+
+// }

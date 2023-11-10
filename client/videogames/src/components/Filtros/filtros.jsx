@@ -20,10 +20,10 @@ export default function Filtered({generos,setGeneros}){
     },[generos]);
 
 
-    const handleGenreChange=async(genres)=>{
-        setSelectedGenre(genres);
+    const handleGenreChange=async(e)=>{
+        setSelectedGenre(e.target.value);
         try{
-            await dispatch(filterByGenre(genres));
+            await dispatch(filterByGenre(e.target.value));
         }catch(error){
             console.error(error);
         }
