@@ -1,6 +1,8 @@
-.landing{
+/* .landing{
+    background-image: url(".");
+    background-size: cover;
     
-}
+} */
 .titulo {
     position: relative; /* Añade posicionamiento relativo */
     z-index: 1; /* Asegura que el título esté en un z-index superior */

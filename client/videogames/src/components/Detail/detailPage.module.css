@@ -87,7 +87,7 @@ margin-left: -760px;
 
 
 
-.container {
+/* .container {
   position: relative;
   font-family: sans-serif;
 }
@@ -176,4 +176,34 @@ margin-left: -760px;
 
 .descripcion {
   margin-left: -760px;
+} */
+
+
+
+/* Estilos para el contenedor principal */
+.detailContainer {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #61a71f;
+}
+
+/* Estilos para la imagen */
+.detailImageContainer {
+  width: 100%;
+  max-width: 200px; /* Ajusta según sea necesario */
+
+  margin-bottom: 10px; /* Espaciado opcional entre la imagen y la descripción */
+}
+
+.detailImage {
+  width: 300%;
+  height: auto;
+}
+
+/* Estilos para la descripción */
+.detailDescription {
+  margin-top: 10px;
 }

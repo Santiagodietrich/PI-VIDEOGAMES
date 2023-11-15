@@ -9,12 +9,15 @@ export default function Card ({id,name,background_image,genres}){
         <div className={styles.card}>
             <div>
                 <div className={styles.cardDetail}>
-                    <h2 className={styles.pais}>Name:</h2>
+                    <h2 className={styles.pais}></h2>
+                    </div>
+                    <img className={styles.bandera} src={background_image} alt={`No se encuentra la imagen de ${name}`} />
+                    <div className={styles.cardDetail}>
                     <Link to={`/detail/${id}`}><h2>{name}</h2></Link>
-                    <h2 className={styles.continente}>Genres:</h2>
+                    <h2 className={styles.continente}></h2>
                     <h2>{genresString}</h2>
                 </div>
-                <img className={styles.bandera} src={background_image} alt={`No se encuentra la imagen de ${name}`} />
+                
             </div>
         </div>
     )

@@ -1,67 +1,60 @@
 const axios=require("axios");
 const {Videogame,Genre}=require("../db")
 
-const VideogamesId=async (req,res)=>{
-    const {id}=req.params
-    if(!id) return res.status(400).send("id no encontrado")
-
+const VideogamesId=async(req, res)=>{
     try{
-        let resultado=await axios.get(`https://api.rawg.io/api/games/${id}?key=574a2e1d874a498db48bf6179e7cbd2a`);
+        const id=req.params.id;
 
-        let platforms=[];//mientras mapeo las plataformas pusheo la propiedad name de cada una a este arreglo y luego lo uso para retornarlo
-        
-        resultado.data.platforms.map((e)=>{
-            platforms.push(e.platform.name);
-        });
-       
-        let genres=[];//mientras mapeo los generos pusheo la propiedad name de cada uno a este arreglo y luego lo uso para retornarlo
+        if( esUUIDv4(id)){
+            let database=await Videogame.findOne({
+                where:{id:id},
+                include:{model:Genre}
+            })
+            if(database){
+                const game=await Videogame.findAll({
+                    attributes:["name","rating","description","released","platforms"],
+                    include:{model:Genre}
+                })
+                res.status(200).json(database)
+            }
+        }else{
+            let resultado=await axios.get(`https://api.rawg.io/api/games/${id}?key=574a2e1d874a498db48bf6179e7cbd2a`);
 
-        resultado.data.genres.map((e)=>{
-            genres.push(e.name);
-        });
+                let platforms=[];//mientras mapeo las plataformas pusheo la propiedad name de cada una a este arreglo y luego lo uso para retornarlo
+                
+                resultado.data.platforms.map((e)=>{
+                    platforms.push(e.platform.name);
+                });
+            
+                let genres=[];//mientras mapeo los generos pusheo la propiedad name de cada uno a este arreglo y luego lo uso para retornarlo
+                console.log("geeenre",genres)
+                resultado.data.genres.map((e)=>{
+                    genres.push(e.name);
+                });
 
-        return res.status(200).json({
-            name:resultado.data.name,
-            description:resultado.data.description,
-            released:resultado.data.released,
-            rating:resultado.data.rating,
-            platforms:platforms,
-            genres:genres,
-            background_image:resultado.data.background_image
-        });
+                return res.status(200).json({
+                    name:resultado.data.name,
+                    description:resultado.data.description,
+                    released:resultado.data.released,
+                    rating:resultado.data.rating,
+                    platforms:platforms,
+                    genres:genres,
+                    background_image:resultado.data.background_image
+                });
+        }
 
 
     }catch(error){
-        try{
-            let database=await Videogame.findByPk(id,{include:[{
-                model:Genre,
-                attributes:['name'],
-                through:{
-                    attributes:[]
-                }
-            }]});
-            let genres=[];
-
-            database.Genres.map((el)=> genres.push(el.name));
-            let platforms=database.platforms.split(" ");
-
-            return res.status(200).json({
-                id:database.id,
-                name:database.name,
-                description:database.description,
-                released:database.released,
-                rating:database.rating,
-                platforms:platforms,
-                genres:genres,
-                background_image:database.background_image,
-            });
-
-
-        }catch(error){
-            return res.status(404).send("No se encontro la ID")
-        }
+        res.status(500).json({error:"Error interno del servidor"})
     }
 }
+
+
+function esUUIDv4(id) {
+    const uuidv4Pattern = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;
+    return uuidv4Pattern.test(id);
+  }
+
 
 module.exports=VideogamesId;
 

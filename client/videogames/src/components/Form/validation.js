@@ -5,11 +5,11 @@ export default function Validation(inputs) {
     const regexPlatform = /^[a-zA-Z\s]*$/;
     const regexGenre=/^[a-zA-Z]*$/;
     const regexReleased=/^\d{4}-\d{2}-\d{2}$/;
-    const regexImg= /^(https?|ftp):\/\/[^\s/$.?#].[^\s]*$/;
+    const regexImg= /\.(jpg|png|gif|JPG|PNG|GIF)$/;
 
 
     function imageVerification(inputs){
-        return regexFile.test(inputs.background_image)
+        return regexImg.test(inputs.background_image)
     }
 
 
@@ -78,19 +78,19 @@ export default function Validation(inputs) {
         }
     }
 
-    if (!inputs.background_image || typeof inputs.background_image !== 'string' || inputs.background_image.length === 0) {
-        errors.background_image = 'Background image URL is required';
-    } else {
-        if (!regexImg.test(inputs.background_image)) {
-            errors.background_image = 'Background image URL is invalid';
-        } else {
-            errors.background_image = '';
-        }
-    }
+    // if (!inputs.background_image || typeof inputs.background_image !== 'string' || inputs.background_image.length === 0) {
+    //     errors.background_image = 'Background image URL is required';
+    // } else {
+    //     if (!regexImg.test(inputs.background_image)) {
+    //         errors.background_image = 'Background image URL is invalid';
+    //     } else {
+    //         errors.background_image = '';
+    //     }
+    // }
     
     
-    // (!inputs.background_image) ? errors.background_image= "Image is required" : errors.background_image="";
-    // (!imageVerification(inputs))? errors.background_image= "Image is invalid" : errors.background_image="";
+    (!inputs.background_image) ? errors.background_image= "Image is required" : errors.background_image="";
+    (!imageVerification(inputs))? errors.background_image= "Image is invalid" : errors.background_image="";
 
     return errors;
 }

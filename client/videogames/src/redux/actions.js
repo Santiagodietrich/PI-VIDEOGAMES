@@ -12,9 +12,9 @@ export const ORDER_ASC="ORDER_ASC";
 export const ORDER_DESC="ORDER_DESC";
 
 
-export function getAllVideogames(){
+export function getAllVideogames(page=1){
     return async function (dispatch){
-        let allVideogames=await axios.get(`http://localhost:3001/videogames`);
+        let allVideogames=await axios.get(`http://localhost:3001/videogames?page=${page}`);
         return dispatch({
             type:"GET_ALL_VIDEOGAMES",
             payload:allVideogames.data
@@ -38,39 +38,26 @@ export function getVideogame(id){
 }
 
 export function getNameVideogames(name){
-    return async function (dispatch){
-        let allVg=await axios.get( `http://localhost:3001/videogames?name=${name}`);
-        return dispatch({
-            type:GET_NAME_VIDEOGAMES,
-            payload:allVg.data
-        });
-    }
+    try{
+        return async function (dispatch){
+            let allVg=await axios.get( `http://localhost:3001/name?name=${name}`);
+            return dispatch({
+                type:GET_NAME_VIDEOGAMES,
+                payload:allVg.data
+            });
+        }
+   }catch(error){
+    console.error(error)
+   }
 }
+
 
 export function createVideoGame(data){
-
-    return async function (dispatch){
-        await axios.post("http://localhost:3001/create",data);
-        return dispatch({
-            type:CREATE_VIDEOGAME,
-        })
+    return async function (){
+        const json=await axios.post("http://localhost:3001/create",data);
+        return json
     }
 }
-
-// export function getGenres(){
-//     try{
-//         return async function (dispatch){
-//             let allGenres=axios.get(`http://localhost:3001/genres`);
-//             console.log("allGenres",allGenres)
-//             return dispatch({
-//                 type:GET_GENRES,
-//                 payload:allGenres.data
-//             });
-//         }
-//     }catch(error){
-//         console.error(error)
-//     }
-// }
 
 
 export function getGenres() {
@@ -78,8 +65,6 @@ export function getGenres() {
       try {
         const response = await axios.get(`http://localhost:3001/genres?key=574a2e1d874a498db48bf6179e7cbd2a`);
         const allGenres = response.data;
-        console.log("allGenres", allGenres);
-  
         dispatch({
           type: GET_GENRES,
           payload: allGenres,

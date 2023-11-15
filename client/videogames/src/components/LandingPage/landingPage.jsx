@@ -7,6 +7,7 @@ import start from "../../assets/start.png"
 
 export default function LandingPage (){
     return(
+        
         <div className={styles.landing}>
             <h1 className={styles.titulo}>PI HENRY-VIDEOGAMES</h1>
             {/* <h2 className={styles.nombre}>BY:Santiago Dietrich</h2> */}
@@ -16,5 +17,6 @@ export default function LandingPage (){
                 <button className={styles.boton}></button>
             </Link>
         </div>
+        
     )
 }
