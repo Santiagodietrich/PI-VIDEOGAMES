@@ -1,33 +1,42 @@
-/* .landing{
-    background-image: url(".");
+.landing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Cambiado a centrar tanto vertical como horizontalmente */
+    height: 101vh;
+    overflow: hidden;
+    background-image: url("./jumpForce.jpg");
     background-size: cover;
-    
-} */
-.titulo {
-    position: relative; /* Añade posicionamiento relativo */
-    z-index: 1; /* Asegura que el título esté en un z-index superior */
-    margin-top: -25px;
-    width: auto;
-    margin-left: -80px;
-    color: black;
+    background-position: center ;
+    width: 1517px;
+    margin-left: -115px;
+    margin-top: -35px;
 }
 
-.controles {
-    position: relative; /* Añade posicionamiento relativo */
-    z-index: 2; /* Asegura que los controles estén en un z-index superior */
-    height: 510px;
-    width: 550px;
-    margin-top: -50px;
-}
+  
+  
+  .titulo {
+    font-size: 60px;
+    letter-spacing: 3px;
+    word-spacing: 0px;
+    color: #f8f8f8;
+    font-weight: bold;
+    text-transform: capitalize;
+    margin-top: -510px; 
+    margin-left: 20px;
+  }
+  
+
+
 
 .boton {
     position: relative; /* Añade posicionamiento relativo */
     z-index: 2; /* Asegura que el botón esté en un z-index superior */
     margin-left: -93px;
-    top: -40px;
+    top: 360px;
     width: 82px;
-    height: 30px;
-    background-color: transparent;
+    height: 40px;
+    background-color: white;
     
 }
 

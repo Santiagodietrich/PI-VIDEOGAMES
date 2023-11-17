@@ -50,30 +50,45 @@ const reducer=(state=initialState,action)=>{
                 generos:action.payload
             }
 
+
+
         // case FILTER_BY_GENRE:
+        //     const genreToFilter = action.payload;
             
-        //     const genreToFilter=action.payload;
-        //     if(genreToFilter === ""){
-        //         return{...state,allGenres: state.allVideogames};// Mostrar todos los videojuegos
-        //     }else{
-        //         const filteredByGenre=state.allVideogames.filter((game)=>
-        //         game.genres.includes(genreToFilter));
-
-        //         return{...state,allGenres:filteredByGenre};// Filtrar por genero
+        //     if (genreToFilter === "") {
+        //         return { ...state, allGenres: state.allVideogames }; // Mostrar todos los videojuegos
+        //     } else {
+        //         const filteredByGenre = state.allVideogames.filter((game) =>
+        //             game.genres.includes(genreToFilter)
+        //         );
+        //         console.log("geeeen",filteredByGenre)
+        //         console.log("stateee",state.allVideogames.genres)
+        //         return { ...state, allGenres: filteredByGenre }; // Filtrar por género
         //     }
-
+        
 
         case FILTER_BY_GENRE:
-            const genreToFilter = action.payload;
-            if (genreToFilter === "") {
-                return { ...state, allGenres: state.allVideogames }; // Mostrar todos los videojuegos
-            } else {
-                const filteredByGenre = state.allVideogames.filter((game) =>
-                    game.genres.includes(genreToFilter)
-                );
-                return { ...state, allGenres: filteredByGenre }; // Filtrar por género
-            }
-        
+    const genreToFilter = action.payload;
+            
+    if (genreToFilter === "") {
+        return { ...state, allGenres: state.allVideogames }; // Mostrar todos los videojuegos
+    } else {
+        const filteredByGenre = state.allVideogames.filter((game) => {
+            // Verifica si algún género coincide con el género proporcionado
+            return game.genres.some((genre) => {
+                // Si los géneros son cadenas, compáralos directamente
+                if (typeof genre === 'string') {
+                    return genre === genreToFilter;
+                }
+                // Si los géneros son objetos, compara sus propiedades 'name'
+                return genre.name === genreToFilter;
+            });
+        });
+
+        console.log("geeeen", filteredByGenre);
+        return { ...state, allGenres: filteredByGenre }; // Filtrar por género
+    }
+
 
 
 

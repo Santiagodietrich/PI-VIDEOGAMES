@@ -11,8 +11,9 @@ export default function Cards() {
   const videoJuegos = useSelector((state) => state.allGenres);
   const dispatch = useDispatch();
 
+
   const [currentPage, setCurrentPage] = useState(1);
-  console.log("current", currentPage)
+
 
   useEffect(() => {
     dispatch(getAllVideogames(currentPage));
@@ -34,19 +35,36 @@ export default function Cards() {
       setCurrentPage(currentPage - 1);
     }
   };
- console.log("VD",videoJuegos);
+
+      // Normaliza la estructura del género para que todos sean objetos con una propiedad 'name'
+      const normalizeGenres = (genres) => {
+        // Asegúrate de que genres sea un array antes de mapearlo
+        return genres && genres.map((genre) => (typeof genre === 'string' ? { name: genre } : genre));
+      };//esta función toma un array de géneros y asegura que cada elemento dentro de ese array
+      // sea un objeto con al menos una propiedad llamada 'name'
+      // Normaliza los géneros
+      const normalizedGenres = normalizeGenres(videoJuegos.genres);//Almacena el resultado en la variable normalizedGenres.
+
   return (
     <div>
       <div className={styles.carta}>
-        <Filtered generos={generos} setGeneros={setGeneros}></Filtered>
+        <Filtered generos={generos} setGeneros={setGeneros} />
         {videoJuegos.map((element) => (
           <Card
             key={element.id}
             id={element.id}
             name={element.name}
-            genres={element.genres}
+            genres={normalizeGenres(element.genres)}
             background_image={element.background_image}
-          />
+          >
+            {normalizedGenres && (
+              <div>
+                {normalizedGenres.map((g, index) => (
+                  <p key={index}>{g.name}</p>
+                ))}
+              </div>
+            )}
+          </Card>
         ))}
       </div>
       <div>
@@ -60,6 +78,9 @@ export default function Cards() {
       </div>
     </div>
   );
+
+
+
 }
 
 

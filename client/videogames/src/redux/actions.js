@@ -23,15 +23,19 @@ export function getAllVideogames(page=1){
 }
 
 
+
+
+
 export function getVideogame(id){
     try{
-    return async function(dispatch){
-        const json=await axios.get(`http://localhost:3001/videogames-${id}`);
-        return dispatch({
-            type:"GET_VIDEOGAME",
-            payload:json.data
-        })
-    }
+        return async function(dispatch){
+            const json=await axios.get(`http://localhost:3001/videogames-${id}`);
+            console.log("json",json);
+            return dispatch({
+                type:"GET_VIDEOGAME",
+                payload:json.data
+            })
+        }
     }catch(error){
         console.error("error al cargar los datos")
     }
