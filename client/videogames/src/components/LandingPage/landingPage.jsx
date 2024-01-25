@@ -8,9 +8,6 @@ export default function LandingPage (){
         
         <div className={styles.landing}>
             <h1 className={styles.titulo}>PI HENRY-VIDEOGAMES</h1>
-            {/* <h2 className={styles.nombre}>BY:Santiago Dietrich</h2> */}
-            {/* <img className={styles.controles} src={controles} alt="controles" />
-            <img className={styles.start} src={start} alt="start" /> */}
             <Link to={'/home'}>
                 <button className={styles.boton}>START</button>
             </Link>

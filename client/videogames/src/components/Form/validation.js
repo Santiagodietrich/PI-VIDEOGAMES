@@ -15,7 +15,6 @@ export default function Validation(inputs) {
 
     const errors = {};
 
-       // Verificar si el nombre está definido y tiene longitud
 
     if(inputs.name){
        if (!inputs.name || typeof inputs.name !== 'string' || inputs.name.length === 0) {

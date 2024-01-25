@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     height: 20px;
-    /* margin-top: -32px;  */
+
     
   }
   
@@ -13,9 +13,9 @@
     outline: none;
     font-size: 14px;
     font-weight: 500;
-    background-color: #ffffff;
+    background-color: #0f0f0f;
     /* caret-color: #f7f7f8; */
-    color: #1f1d1d;
+    /* color: #ffffff; */
     padding: 7px 10px;
     border: 2px solid transparent;
     border-top-left-radius: 7px;
@@ -33,14 +33,12 @@
   }
   
   .input:focus {
-    border: 2px solid #a970ff;
-    background-color: #d0d0d6;
+    border: 2px solid #2b2b2b;
+    background-color: #2b2b2b;
   }
   
   .boton {
-    /* border: none;
-    cursor: pointer; */
-    background-color: rgb(255, 255, 255);
+    background-color: #0f0f0f;
     border-top-right-radius: 7px;
     border-bottom-right-radius: 7px;
     height: 40px;
@@ -49,8 +47,9 @@
     justify-content: center;
     align-items: center;
     margin-top: 50px;
+    color:#646cff
   }
   
   .boton:hover {
-    background-color: rgb(146, 146, 146);
+    background-color: rgb(43, 43, 43);
   }
