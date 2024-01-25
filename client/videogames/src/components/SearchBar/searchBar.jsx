@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import {useState} from "react";
 import styles from "./searchBar.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getNameVideogames } from "../../redux/actions";
 import { Link } from "react-router-dom";
 

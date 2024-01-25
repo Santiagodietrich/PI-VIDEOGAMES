@@ -1,32 +1,10 @@
 .carta{
-    /* display: flex;
-    justify-content: space-evenly;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    align-content: center;
-    padding: 10px;*/
-	margin-top: 90px; 
-
+	margin-top: 70px; 
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-   
     flex-direction: row; 
 }
-
-/* .carta div{ */
-    
-    /* width: 240px;
-    margin: 5px;
-     */
-
-     /* width: 300px;
-     height: 418px; 
-     margin: 30px;
-     margin-right:78px
-} */
-
 
 .carta div {
   width: 310px;
@@ -37,7 +15,6 @@
   font-size: 14px; /* Tamaño de fuente más pequeño */
   letter-spacing: -1px; /* Espaciado de letras ajustado a la izquierda */
 }
-
 
 .botonN {
 	width: 65px;
@@ -58,6 +35,7 @@
 	padding-left: 8px;
 	left: 700px;
     margin-top: -10px;
+	z-index: 4;
   }
   
  
@@ -97,6 +75,7 @@
 	right: -150px;
 	top: 47px;
     left: 500px;
+	z-index: 4;
   }
   
  
@@ -115,5 +94,65 @@
 
 
 
+  .loader{
+	font-size: 48px;
+	color: #000000;
+	display: inline-block;
+	font-family: Arial, Helvetica, sans-serif;
+	font-weight: 400;
+	position: relative;
+  }
+  .loader:after{
+	content: 'Loading';
+	position: relative;
+	z-index: 5;
+  }
+  .loader:before{
+	content: '';
+	height: 6px;
+	border: 1px solid;
+	border-radius: 10px;
+	width: 100%;
+	position: absolute;
+	bottom: 0px;
+	background: linear-gradient(#FF3D00 100%, transparent 0) no-repeat;
+	background-size: 0% auto;
+	animation: 10s lineGrow linear infinite;
+  }
 
+  @keyframes lineGrow {to {  background-size: 100% auto}}
+
+  .botonHome {
+	width: 65px;
+	height: 35px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 10px;
+	background-color: rgb(5, 5, 5);
+	border-radius: 30px;
+	color: rgb(19, 19, 19);
+	font-weight: 600;
+	border: none;
+	position: relative;
+	cursor: pointer;
+	transition-duration: .2s;
+	box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.116);
+	padding-left: 8px;
+    top: -58px;
+	left: 115px;
+	z-index: 6;
+	
+  }
   
+ 
+  
+  .botonHome:hover {
+	background-color:  rgb(49, 48, 48);
+	transition-duration: .5s;
+  }
+  
+  .botonHome:active {
+	transform: scale(0.97);
+	transition-duration: .2s;
+  }

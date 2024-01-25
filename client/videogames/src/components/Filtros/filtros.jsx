@@ -3,18 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { filterByGenre, filterOrigin, orderByName, orderByRating } from "../../redux/actions";
 import styles from "./filtros.module.css";
 
-export default function Filtered({ generos, setGeneros }) {
+export default function Filtered() {
     const dispatch = useDispatch();
     const allGenres = useSelector((state) => state.generos);
     const [selectedGenre, setSelectedGenre] = useState('');
     const [selectedOrigin, setSelectedOrigin] = useState('');
 
-    useEffect(() => {
-        if (generos && generos.length > 0) {
-            setGeneros(generos);
-        }
-    }, [generos, setGeneros]);
-
+   
 
     const handleGenreChange = async (e) => {
         const selectedGenre = e.target.value;

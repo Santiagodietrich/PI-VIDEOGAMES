@@ -10,19 +10,37 @@ export const ORDER_BY_RATING="ORDER_BY_RATING";
 export const FILTER_BY_ORIGIN="FILTER_BY_ORIGIN";
 export const ORDER_ASC="ORDER_ASC";
 export const ORDER_DESC="ORDER_DESC";
+export const NEXT_PAGE="NEXT_PAGE";
+export const PREV_PAGE="PREV_PAGE";
+export const CLEAR_VIDEOGAMES="CLEAR_VIDEOGAMES";
+export const SET_PAGE="SET_PAGE"
 
 
-export function getAllVideogames(page=1){
+export function getAllVideogames(page){
     return async function (dispatch){
         let allVideogames=await axios.get(`http://localhost:3001/videogames?page=${page}`);
-        return dispatch({
+        let data=allVideogames.data;
+         dispatch({
             type:"GET_ALL_VIDEOGAMES",
-            payload:allVideogames.data
+            payload:data
         });
     };
 }
 
 
+export function nextPage(payload){
+    return{
+        type:NEXT_PAGE,
+        payload
+    }
+}
+
+export function  prevPage(payload){
+    return{
+        type:PREV_PAGE,
+        payload
+    }
+}
 
 
 
@@ -30,7 +48,6 @@ export function getVideogame(id){
     try{
         return async function(dispatch){
             const json=await axios.get(`http://localhost:3001/videogames-${id}`);
-            console.log("json",json);
             return dispatch({
                 type:"GET_VIDEOGAME",
                 payload:json.data
@@ -40,6 +57,8 @@ export function getVideogame(id){
         console.error("error al cargar los datos")
     }
 }
+
+
 
 export function getNameVideogames(name){
     try{
@@ -56,12 +75,14 @@ export function getNameVideogames(name){
 }
 
 
+
 export function createVideoGame(data){
     return async function (){
         const json=await axios.post("http://localhost:3001/create",data);
         return json
     }
 }
+
 
 
 export function getGenres() {
@@ -78,7 +99,9 @@ export function getGenres() {
       }
     };
   }
-  
+
+
+
 
 export function filterByGenre(payload){
     return{
@@ -103,5 +126,16 @@ export function orderByRating(payload){
 
 export function filterOrigin (payload){
     return { type: FILTER_BY_ORIGIN, payload };
-  };
+};
 
+export function clearVideogames (){
+    return{
+        type:CLEAR_VIDEOGAMES
+    }
+}
+
+export function setPage (){
+    return{
+        type:SET_PAGE
+    }
+}

@@ -3,7 +3,6 @@
     width: 90px;
     height: 314px;
     border-radius: 20px;
-    background: #c5fcb2;
     background-image: url("./fondoVioleta.jpg");
     background-size:320px;
     position: relative;
@@ -35,7 +34,7 @@
     box-shadow: 0 4px 18px 0 rgba(0, 0, 0, 0.25);
   }
   
-  .bandera {
+  .img {
     width: 50%;
     height: 30%;
     position: absolute; /* Superpone la bandera */
@@ -45,3 +44,8 @@
     z-index: 1; /* Asegura que la bandera esté sobre la tarjeta */
   }
   
+.gen{
+  margin-top:-20px;
+ margin-left: -50px;
+ font-size: 19px;
+}

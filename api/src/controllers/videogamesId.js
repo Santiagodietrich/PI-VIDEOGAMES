@@ -6,7 +6,7 @@ const VideogamesId=async(req, res)=>{
         const id=req.params.id;
 
         if( esUUIDv4(id)){
-            let database=await Videogame.findOne({
+            let database=await Videogame.findOne({// Consulto a la base de datos para obtener info del videojuego por su ID
                 where:{id:id},
                 include:{model:Genre}
             })
@@ -26,19 +26,13 @@ const VideogamesId=async(req, res)=>{
                     platforms.push(e.platform.name);
                 });
             
-                let genres=[];//mientras mapeo los generos pusheo la propiedad name de cada uno a este arreglo y luego lo uso para retornarlo
-                console.log("geeenre",genres)
-                resultado.data.genres.map((e)=>{
-                    genres.push(e.name);
-                });
-
                 return res.status(200).json({
                     name:resultado.data.name,
                     description:resultado.data.description,
                     released:resultado.data.released,
                     rating:resultado.data.rating,
                     platforms:platforms,
-                    genres:genres,
+                    genres:resultado.data.genres,
                     background_image:resultado.data.background_image
                 });
         }
@@ -49,7 +43,7 @@ const VideogamesId=async(req, res)=>{
     }
 }
 
-
+//esta función se utiliza para validar si una cadena de texto tiene el formato de un UUID(hash)
 function esUUIDv4(id) {
     const uuidv4Pattern = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-4[0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$/;
     return uuidv4Pattern.test(id);

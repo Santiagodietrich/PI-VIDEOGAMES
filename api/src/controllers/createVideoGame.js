@@ -6,7 +6,7 @@ const createVideoGame=async(req,res)=>{
     
     const{name,description,released,rating,platforms,genres}=req.body;
 
-    console.log("oli",req.body)
+   
 
     if(!name || !description || !released || !rating || !platforms || !genres)
     return res.status(400).json({message:"Faltan Parametros"});

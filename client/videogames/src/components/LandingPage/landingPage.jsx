@@ -1,9 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./landingPage.module.css";
-import controles from "../../assets/controles.png";
-import start from "../../assets/start.png";
-import fantasma from "../../assets/fantasmin.png";
+
 
 export default function LandingPage (){
     return(
