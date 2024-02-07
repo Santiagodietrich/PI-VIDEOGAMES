@@ -6,6 +6,9 @@ import {Routes,Route,useLocation} from "react-router-dom";
 import NavBar from "../src/components/NavBar/navBar";
 import Cards from "../src/components/Cards/cards";
 
+axios.defaults.baseURL = "https://localhost:3001"
+
+
 function App() {
 
   const location=useLocation();
